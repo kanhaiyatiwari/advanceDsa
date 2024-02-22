@@ -11,8 +11,12 @@ public class Main {
 			current.next=new Node(i);
 			current=current.next;
 		}
-
-		System.out.println(insertPostion(head, 400, 5));
+		
+		current.next=head;
+//System.out.println(current);
+//		System.out.println(insertPostion(head, 400, 5));
+//		System.out.println(reverse(head));
+		System.out.println(hasCycle(head));
 	}
 	
 //	insert at a position
@@ -34,5 +38,40 @@ public class Main {
 	current.next=newNode;
 	return head;
 	}
+	
+//	reverse a list
+	
+	public static Node reverse(Node head) {
+		
+		Node current=head;
+		Node pre=null;
+		
+		while(current!=null) {
+			Node temp=current.next;
+			current.next=pre;
+			pre=current;
+			current=temp;
+		}
+		return pre;
+	}
+	
+	public static boolean hasCycle(Node head) {
+        if (head == null || head.next == null) {
+            return false; // No cycle if the list is empty or has only one node
+        }
+
+        Node slow = head;
+        Node fast = head.next; // Move fast pointer one step ahead initially
+
+        while (fast != null && fast.next != null) {
+            if (slow == fast) {
+                return true; // Cycle detected
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return false; // No cycle detected
+    }
 
 }
